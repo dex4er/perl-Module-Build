@@ -5310,6 +5310,7 @@ sub cbuilder {
   require ExtUtils::CBuilder;
   return $s->{_cbuilder} = ExtUtils::CBuilder->new(
     config => $self->config,
+    module_name => $self->module_name,
     ($self->quiet ? (quiet => 1 ) : ()),
   );
 }
@@ -5495,8 +5496,8 @@ sub _infer_xs_spec {
 
   $spec{bs_file} = File::Spec->catfile($spec{archdir}, "${file_base}.bs");
 
-  $spec{lib_file} = File::Spec->catfile($spec{archdir},
-                                        "${file_base}.".$cf->get('dlext'));
+  $spec{lib_file} = File::Spec->catfile($self->cbuilder->lib_file($spec{archdir},
+                                        "${file_base}.".$cf->get('dlext')));
 
   $spec{c_file} = File::Spec->catfile( $spec{src_dir},
                                        "${file_base}.c" );
