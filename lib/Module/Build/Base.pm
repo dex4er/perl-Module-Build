@@ -5496,7 +5496,7 @@ sub _infer_xs_spec {
 
   $spec{bs_file} = File::Spec->catfile($spec{archdir}, "${file_base}.bs");
 
-  $spec{lib_file} = File::Spec->catfile($self->cbuilder->lib_file($spec{archdir},
+  $spec{lib_file} = $self->cbuilder->lib_file(File::Spec->catfile($spec{archdir},
                                         "${file_base}.".$cf->get('dlext')));
 
   $spec{c_file} = File::Spec->catfile( $spec{src_dir},
